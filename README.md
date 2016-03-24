@@ -4,13 +4,13 @@ a csv download for each survey. All submissions to date are included for the giv
 single download.
 
 ## Install
-1. Install the required libraries:
+- Install the required libraries:
 
 ```
  npm install
 ```
 
-2. Add your parse API keys to the app.js file in the ParseService:
+- Add your parse API keys to the app.js file in the ParseService:
 
 ```
     // the parse application keys
@@ -21,4 +21,7 @@ single download.
         }
     };
 ```
+
+- Open index.html and test. Username and password are hard coded to test/test. You can easily update
+for more secure authentication.
 

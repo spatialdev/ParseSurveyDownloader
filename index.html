@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <title>TechTracker Explorer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Spatial Development International, LLC">
+    <meta name="generator" content="SpatialDev">
+    <meta name="description" content="A simple and easy to use survey download tool. Connects to a single instance of Parse and provides a csv download for each survey. All submissions to date are included for the given survey in a single download.">
+    <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="site.css" />
+</head>
+
+<body ng-app="ParseExplorer">
+    <div id="app" ng-controller="AppCtrl">
+        <div id="header" class="page-header">
+            <button id="logout" type="button" class="btn btn-primary" ng-click="logout();" ng-show="loggedIn">
+                Logout
+            </button>
+            <h1>{{title}} <small> - tool for exploring survey submissions</small></h1>            
+        </div>
+        <div id="login" ng-show="loggedIn==false">
+            <div class="login-wrapper">
+                <div class="login-container">
+                    <h1>Log In</h1>
+                    <div class="login">
+                        <div class="row">
+                            <input class="user-input" name="user" id="user" autocomplete="off" type="text" ng-model="user.username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" value="">
+                            <div class="input-icon"><i class="fa fa-user"></i></div>
+                        </div>
+                        <div class="row">
+                            <input class="user-input password" name="password" id="password" autocomplete="off" type="password" ng-model="user.password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" value="">
+                            <div class="input-icon"><i class="fa fa-lock"></i></div>
+                        </div>
+                        <div class="row">
+                            <input class="submit-button" ng-click="login(user)" type="submit" value="Log In">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="survey" ng-show="loggedIn">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="surveyCollection in surveyCollections">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>{{surveyCollection.name}}</h3>
+                            <h4>Number of submissions: {{surveyCollection.collection.length}}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <button id="download" type="button" class="btn btn-primary" ng-click="download(surveyCollection);">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>           
+        </div>
+    </div>
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/underscore/underscore-min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
