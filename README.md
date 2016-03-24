@@ -25,3 +25,9 @@ single download.
 - Open index.html and test. Username and password are hard coded to test/test. You can easily update
 for more secure authentication.
 
+Log In Screen:
+![Login](https://github.com/spatialdev/ParseSurveyDownloader/blob/master/Example1.PNG "Login")
+
+Sample Survey List:
+![List](https://github.com/spatialdev/ParseSurveyDownloader/blob/master/Example2.PNG "List")
+
