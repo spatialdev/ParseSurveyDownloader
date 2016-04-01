@@ -43,6 +43,7 @@
             </div>
         </div>
         <div id="survey" ng-show="loggedIn">
+            <div ng-show="surveyCollections.length === 0"><h1><small>No survey's have been submitted.</small></h1></div>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="surveyCollection in surveyCollections">
                     <div class="row">
