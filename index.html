@@ -43,12 +43,18 @@
             </div>
         </div>
         <div id="survey" ng-show="loggedIn">
+            <div class="row loading" ng-show="loading">
+                <img id="loading" src="gears.gif" />
+            </div>
+            <div class="row" ng-show="loading">
+                <div class="loading-message">Loading Surveys...</div>
+            </div>
             <div ng-show="surveyCollections.length === 0"><h1><small>No survey's have been submitted.</small></h1></div>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="surveyCollection in surveyCollections">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3>{{surveyCollection.name}}</h3>
+                            <h3>{{surveyCollection.name || "No Title" }}</h3>
                             <h4>Number of submissions: {{surveyCollection.collection.length}}</h4>
                         </div>
                         <div class="col-md-4">

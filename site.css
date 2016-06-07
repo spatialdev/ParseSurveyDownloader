@@ -20,6 +20,28 @@ body {
     margin-top: 24px;
 }
 
+#loading {
+    display: table-cell;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 155px;
+    margin-left: 158px;
+    color: #777;
+    font-weight: 400;
+}
+
 .nav-tabs > li > a {
     border: 1px solid #efefef;
 }
@@ -44,7 +66,6 @@ body {
 
     #login .login-wrapper {
         display: table-cell;
-
     }
 
         #login .login-wrapper .login-container {
@@ -123,7 +144,8 @@ body {
                     width: 210px;
                     height: 44px;
                 }
-                #login .login-wrapper .login-container .login .error{
+
+                #login .login-wrapper .login-container .login .error {
                     color: red;
                     font-size: 12px;
                     font-style: italic;

@@ -10,18 +10,19 @@ angular.module('ParseExplorer', [
 angular.module('ParseExplorer.controllers', []).controller('AppCtrl', function ($scope, ParseService) {
     $scope.loggedIn = false;
     $scope.title = "TechTracker Explorer";
-    $scope.user = {username: null, password: null};
+    $scope.user = { username: null, password: null };
 
-    // call the parse service to get the survey data
-    ParseService.getData().then(function (data) {
-        $scope.surveyCollections = orderSurveys(data);
-    });
-    
     // called when user clicks the login button
     $scope.login = function (user) {
         $(".login div.error").remove();
         if (user.username == 'test' && user.password == 'test') {
             $scope.loggedIn = true;
+
+            // call the parse service to get the survey data
+            ParseService.getData().then(function (data) {
+                $scope.surveyCollections = orderSurveys(data);
+            });
+
         }
         else {
             $("#password").after("<div class='error'>The username or password is incorrect</div>"); 
@@ -142,7 +143,7 @@ angular.module('ParseExplorer.controllers', []).controller('AppCtrl', function (
 });
 
 // service collects all data from the parse application service
-angular.module('ParseExplorer.services', []).service('ParseService', function ($q, $http) {
+angular.module('ParseExplorer.services', []).service('ParseService', function ($q, $http, $rootScope) {
     
     // the parse application keys
     var config = {
@@ -151,17 +152,19 @@ angular.module('ParseExplorer.services', []).service('ParseService', function ($
             'X-Parse-REST-API-Key': ''
         }
     };
-    
+  
     var service = {};
-    
+    var parseData = [];
+    $rootScope.loading = true;
+
     service.getData = function () {        
         var deferred = $q.defer();      
-        $http.get("https://api.parse.com/1/classes/surveySubmissions", config).success(function (data, status, headers, config) {
-            var parseData = [];            
+        $http.get("https://api.parse.com/1/classes/surveySubmissions?limit=1000", config).success(function (data, status, headers, config) {
             for (var i = 0, il = data.results.length; i < il; i++) {
                 var currentItem = data.results[i];
                 parseData.push(currentItem);
-            }            
+            }
+            $rootScope.loading = false;
             deferred.resolve(parseData);
         })
         .error(function (data, status, headers, config) {            
